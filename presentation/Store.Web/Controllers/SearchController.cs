@@ -5,14 +5,14 @@ namespace Store.Web.Controllers
 {
     public class SearchController : Controller
     {
-        private readonly IBookRepository bookRepository;
-        public SearchController(IBookRepository bookReporsitory)
+        private readonly BookService bookService;
+        public SearchController(BookService bookService)
         {
-            this.bookRepository = bookReporsitory;
+            this.bookService = bookService;
         }
         public IActionResult Index(string query)
         {
-            var books = bookRepository.GetAllByTitle(query);
+            var books = bookService.GetAllByQuery(query);
             return View(books);
         }
     }
